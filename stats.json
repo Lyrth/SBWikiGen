@@ -1,0 +1,26 @@
+{
+
+  "biomecoldImmunity"       : "Cold Immunity",
+  "biomeheatImmunity"       : "Heat Immunity",
+  "biomeradiationImmunity"  : "Radiation Immunity",
+  "fireStatusImmunity"      : "Fire Immunity",
+  "iceStatusImmunity"       : "Ice Immunity",
+  "electricStatusImmunity"  : "Electric Immunity",
+  "specialStatusImmunity"   : "Special Status Immunity",
+  "healingStatusImmunity"   : "Healing Status Immunity",
+  "poisonStatusImmunity"    : "Poison Immunity",
+  "tarStatusImmunity"       : "Tar Immunity",
+  "lavaImmunity"            : "Lava Immunity",
+  "wetImmunity"             : "Wet Immunity",
+  "slimeImmunity"           : "Slime Immunity",
+  "stunImmunity"            : "Stun Immunity",
+  "invulnerable"            : "Invulnerability",
+  "grit"                    : "Knockback Resistance",
+  "breathProtection"        : "Breath Protection",
+  "maxEnergy"               : "Max Energy Boost",
+  "maxHealth"               : "Max Health Boost",
+  "powerMultiplier"         : "Power Multiplier",
+  "protection"              : "Armor Boost",
+  "healthRegen"             : "Health Regeneration",
+  "perfectBlockLimitRegen"  : "Perfect Block Limit Regeneration"
+}
