@@ -15,6 +15,7 @@
 -- readerPath | { readerPath [, databaseName [, keyNameProvider]] }
 -- databaseName = databaseName or readerPath:match("[^.]+")
 -- keyNameProvider = keyNameProvider(fileName, resultObject, keyCaptures:table) or key
+-- todo fill
 local extReaders = {
   dungeon = "dungeon",
   treasurepools = "pools",

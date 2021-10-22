@@ -11,6 +11,7 @@
 ---@field desc string
 ---@field category string     @ mappable
 ---@field maxStack number
+---@field tooltipKind string
 ---@field itemTags string[]
 ---@field teaches string[]
 ---@field icon string|table   @ process
@@ -37,6 +38,7 @@ local function read(path, json)
     icon = json.inventoryIcon,    -- TODO process icon - do on process stage
     price = json.price or 0,
     maxStack = json.maxStack or 1,
+    tooltipKind = json.tooltipKind or "base",
     teaches = json.learnBlueprintsOnPickup or {},
     itemTags = json.itemTags or {},
     image = json.largeImage or json.image or json.inventoryIcon,
@@ -49,8 +51,6 @@ local function read(path, json)
     hylotlDesc = json.hylotlDescription,
     novakidDesc = json.novakidDescription,
   }
-
-  -- TODO color mappings (armor) - colorOptions - pass to icon
 
   return item
 end

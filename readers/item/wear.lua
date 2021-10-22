@@ -6,8 +6,12 @@
 
 --- Wearables
 ---@class Wear : Item
----@field tier number
--- TODO effects
+---@field level number
+---@field rawEffects table[]          @ eval with {effect.levelFunction}, [ {"stat": "..", "amount": 1.0}, {"stat": "..", "baseMultiplier": 1.0} ]
+---@field effects (table|string)[]    @ [ "ghostlyglow", {"stat" : "wetImmunity", "amount" : 1.0 } ]
+---@field colorOptions table[]        @ [ { "abcdef": "123456", ... } ]
+
+local log = require "log"
 
 local base = require "readers.item".read
 
@@ -15,9 +19,29 @@ local function read(path, json)
   ---@type Wear
   local item = base(path, json)
 
-  item.tier = json.level
+  item.level = json.level
+  item.effects = json.effects
+  item.rawEffects = json.leveledStatusEffects
+  item.colorOptions = json.colorOptions
 
-  -- TODO stats
+  if next(item.rawEffects) == nil then
+    item.rawEffects = {}
+  end
+
+  if next(item.effects) == nil then
+    item.effects = {}
+  end
+
+  local exclude = {}
+  for i, effect in pairs(item.rawEffects) do
+    if type(effect) == "table" and type(effect.levelFunction) == "string" then
+      -- good
+    else
+      log.warn("Leveled status effect #%s <%s> invalid for %s, not including.", i, type(effect), path)
+      table.insert(exclude, i)
+    end
+  end
+  for _, i in ipairs(exclude) do table.remove(item.rawEffects, i) end
 
   return item
 end

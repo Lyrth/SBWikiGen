@@ -83,6 +83,7 @@ io.write(string.format("Files: %d, Dirs: %d, Total %d\n", files, dirs, files + d
 
 -- TODO: for mask, mask opacity apply, set to mannequin image
 
+-- TODO: NOTE: armor colorOptions ignores alpha if alpha not included (24-bit)
 
 
 -- TODO check if upstream modified

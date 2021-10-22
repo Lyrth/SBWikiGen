@@ -8,7 +8,7 @@
 ---@class Augment : Item
 ---@field augmentType string
 ---@field augmentName string
----@field effects (table|string)[]
+---@field effects (table|string)[]    @ [ "ghostlyglow", {"stat" : "wetImmunity", "amount" : 1.0 } ]
 
 local log = require "log"
 local base = require "readers.item".read
@@ -30,7 +30,12 @@ local function read(path, json)
     item.augmentType = "lure"
     item.effects = {}
   else
-    log.warn("unknown augment type for "..path)
+    log.warn("unknown augment type for %s, ignoring.", path)
+    return nil
+  end
+
+  if next(item.effects) == nil then
+    item.effects = {}
   end
 
   return item

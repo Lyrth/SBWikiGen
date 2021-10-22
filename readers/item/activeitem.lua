@@ -6,17 +6,39 @@
 
 --- All sorts of activeitems
 ---@class Activeitem : Item
----@field tier number
+---@field price number            @ eval with itemLevelPriceMultiplier
 ---@field element string
 ---@field twoHanded boolean
-
--- TODO
+---@field level number
+---@field priAbility string|nil       @ can both be nil if relying on self config
+---@field priAbilityName string|nil   @ if nil, get from abi db
+---@field altAbility string|nil
+---@field altAbilityName string|nil   @ if nil, get from abi db
+---       [below: if nil, get from abi db defaults first, before mul]
+---@field dpsRaw number|nil       @ eval with weaponDamageLevelMultiplier
+---@field fireTime number|nil
+---@field shotDmgRaw number|nil   @ eval with weaponDamageLevelMultiplier
+---@field shotEnergy number|nil
 
 local base = require "readers.item".read
 
 local function read(path, json)
   ---@type Activeitem
   local item = base(path, json)
+
+  item.element = json.elementalType or "physical"
+  item.twoHanded = json.twoHanded or false
+  item.level = json.level or 1
+
+  item.priAbility = json.primaryAbilityType
+  item.priAbilityName = json.primaryAbility and json.primaryAbility.name
+  item.altAbility = json.altAbilityType
+  item.altAbilityName = json.altAbility and json.altAbility.name
+
+  item.dpsRaw = json.primaryAbility and json.primaryAbility.baseDps
+  item.fireTime = json.primaryAbility and json.primaryAbility.fireTime and json.primaryAbility.fireTime
+  item.shotDmgRaw = item.dpsRaw and item.fireTime and (item.dpsRaw * item.fireTime)
+  item.shotEnergy = json.primaryAbility and json.primaryAbility.energyUsage and item.fireTime and (json.primaryAbility.energyUsage * item.fireTime)
 
   return item
 end
