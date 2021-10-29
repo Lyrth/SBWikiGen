@@ -56,15 +56,15 @@ https://starboundarcana-staging.fandom.com/api.php?action=query&format=json&prop
 --]]
 
 
+require "reqset"
 
-package.path = package.path .. ";./lib/?/init.lua"
-local util = require "util"
+local fsutil = require "util.fs"
 
 local files = 0
 local dirs = 0
 
 local f = ""
-for filename in util.dirTree("../src/.///.//", true, "lua") do
+for filename in fsutil.dirTree("../src/.///.//", true, "lua") do
   print("["..filename.."]")
   files = files + 1;
   f = filename
